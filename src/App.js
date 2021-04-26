@@ -1,10 +1,11 @@
 import './App.css'
 import React, {useState} from 'react'
+import LoadingMask from './components/LoadingMask/LoadinMask.jsx'
 
 const App = () => {
 
 const [data, setData] =useState([])
-const [serach,setSearch] = useState("")
+const [search,setSearch] = useState("")
 const [loading, setLoading] = useState(false)
 
 
@@ -16,7 +17,7 @@ const startFetch =() => {
     setLoading(true)
     setData([])
     
-    fetch(`/api/clinets?search=${search}`)
+    fetch(`/api/clients?search=${search}`)
       .then((resopnse) => (resopnse.json()))
       .then((responseAdat)=>(setData(responseAdat)))
       .catch(error=>{
@@ -43,7 +44,14 @@ const startFetch =() => {
       <input type="text" onChange={(ev)=>(setSearch(ev.target.value))}/>
       <button onClick={()=>(startFetch())}>Search</button>
 
-      
+      {
+        loading ? <LoadingMask/>
+                : data === null
+                                ? <p>Upps Something happend</p>
+                                : data.map((client)=>( <div>{client.name}</div> ))
+
+      }
+
     </div>
   )
 }
