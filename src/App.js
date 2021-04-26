@@ -43,8 +43,8 @@ const startFetch =() => {
     <div className="App">
       <h1>Clients</h1>
       <input type="text" onChange={(ev)=>(setSearch(ev.target.value))}/>
-      <button onClick={()=>(startFetch())}>Search</button>
-
+      <button disabled={ search.length < 3} onClick={()=>(startFetch())}>Search</button>
+ 
       {
         loading ? <LoadingMask/>
                 : data === null
