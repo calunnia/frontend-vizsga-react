@@ -48,7 +48,7 @@ const startFetch =() => {
         loading ? <LoadingMask/>
                 : data === null
                                 ? <p>Upps Something happend</p>
-                                : data.map((client)=>( <div>{client.name}</div> ))
+                                : data.map((client, i )=>( <Client data={client} key={i.toString() + "-client"}/> ))
 
       }
 
